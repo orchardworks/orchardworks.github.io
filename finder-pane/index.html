@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Finder Pane - Orchardworks</title>
-  <meta name="description" content="A visual file browser pane for your terminal.">
+  <meta name="description" content="A visual file browser pane for your terminal. Browse files, preview images and videos right next to Claude Code.">
   <link rel="icon" type="image/png" href="../icon.png">
   <link rel="canonical" href="https://orchardworks.dev/finder-pane/">
 
   <!-- OGP -->
   <meta property="og:title" content="Finder Pane">
-  <meta property="og:description" content="A visual file browser pane for your terminal.">
+  <meta property="og:description" content="A visual file browser pane for your terminal. Browse files, preview images and videos right next to Claude Code.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://orchardworks.dev/finder-pane/">
   <meta property="og:image" content="https://orchardworks.dev/og.png">
@@ -20,14 +20,14 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@orchardworks26">
   <meta name="twitter:title" content="Finder Pane">
-  <meta name="twitter:description" content="A visual file browser pane for your terminal.">
+  <meta name="twitter:description" content="A visual file browser pane for your terminal. Browse files, preview images and videos right next to Claude Code.">
   <meta name="twitter:image" content="https://orchardworks.dev/og.png">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-      background: #fafafa;
+      background: #f0f4f8;
       color: #1a1a1a;
       min-height: 100vh;
       display: flex;
@@ -39,54 +39,271 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 4rem 2rem;
-      max-width: 640px;
+      padding: 4rem 2rem 2rem;
+      max-width: 760px;
       margin: 0 auto;
     }
 
+    /* Hero */
     h1 {
-      font-size: 1.75rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
+      font-size: 2.25rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
       margin-bottom: 0.75rem;
+      background: linear-gradient(135deg, #1a6fb5, #2d9cdb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    .description {
-      font-size: 1.05rem;
-      color: #555;
+    .tagline {
+      font-size: 1.15rem;
+      color: #4a5568;
       text-align: center;
-      line-height: 1.6;
-      margin-bottom: 2rem;
+      line-height: 1.7;
+      margin-bottom: 1.75rem;
+    }
+
+    .install-cmd {
+      background: #1e2d3d;
+      color: #d0dce8;
+      font-family: "SF Mono", Menlo, monospace;
+      font-size: 0.875rem;
+      padding: 0.65rem 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 2.5rem;
+      user-select: all;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .install-cmd .prompt { color: #5ba0d0; }
+
+    /* Hero media */
+    .hero-media {
+      width: 100%;
+      margin-bottom: 3.5rem;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid #d0dce8;
+      box-shadow: 0 8px 32px rgba(30,80,140,0.12);
+    }
+
+    .hero-media img,
+    .hero-media video {
+      width: 100%;
+      display: block;
+    }
+
+    /* Features */
+    .features {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    }
+
+    .feature-card {
+      background: #fff;
+      border: 1px solid #dce6f0;
+      border-radius: 14px;
+      padding: 1.5rem;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+
+    .feature-card:hover {
+      border-color: #b0cceb;
+      box-shadow: 0 4px 20px rgba(30,80,140,0.08);
+    }
+
+    .feature-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .feature-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, #e8f2fc, #d4e6f8);
+      color: #2a7cc7;
+    }
+
+    .feature-title {
+      font-size: 1.05rem;
+      font-weight: 650;
+      color: #1a3a5c;
+    }
+
+    .feature-desc {
+      font-size: 0.9rem;
+      color: #556677;
+      line-height: 1.65;
+    }
+
+    .feature-desc a {
+      color: #2a7cc7;
+      text-decoration: none;
+    }
+
+    .feature-desc a:hover {
+      text-decoration: underline;
+    }
+
+    .feature-desc code {
+      font-family: "SF Mono", Menlo, monospace;
+      font-size: 0.825rem;
+      background: #eef3f9;
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+      color: #1a5a96;
+    }
+
+    .feature-media {
+      width: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid #e0e8f0;
+      margin-top: 1rem;
+    }
+
+    .feature-media img {
+      width: 100%;
+      display: block;
+    }
+
+    .feature-media-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    /* Setup section */
+    .setup {
+      width: 100%;
+      margin-bottom: 3rem;
+    }
+
+    .setup h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #1a3a5c;
+      margin-bottom: 1.25rem;
+    }
+
+    .setup-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .step {
+      background: #fff;
+      border: 1px solid #dce6f0;
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+
+    .step:hover {
+      border-color: #b0cceb;
+      box-shadow: 0 2px 12px rgba(30,80,140,0.06);
+    }
+
+    .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2a7cc7, #2d9cdb);
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .step-content {
+      flex: 1;
+    }
+
+    .step-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #2a7cc7;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.3rem;
+    }
+
+    .step-content code {
+      font-family: "SF Mono", Menlo, monospace;
+      font-size: 0.875rem;
+      color: #1a1a1a;
+    }
+
+    .step-note {
+      font-size: 0.8rem;
+      color: #8899aa;
+      margin-top: 0.3rem;
+    }
+
+    .step-note code {
+      font-size: 0.75rem;
+      background: #eef3f9;
+      padding: 0.1em 0.35em;
+      border-radius: 3px;
+      color: #1a5a96;
+    }
+
+    /* Badges */
+    .badges {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     .badge {
       display: inline-block;
       font-size: 0.75rem;
       font-weight: 600;
-      color: #888;
-      border: 1px solid #ddd;
+      color: #2a7cc7;
+      border: 1px solid #c5ddf0;
+      background: #eef5fc;
       border-radius: 999px;
-      padding: 0.25rem 0.75rem;
-      margin-bottom: 2rem;
+      padding: 0.3rem 0.85rem;
     }
 
+    /* Links */
     .links {
       display: flex;
       gap: 1.5rem;
+      margin-bottom: 1.5rem;
     }
 
     .links a {
-      color: #888;
+      color: #8899aa;
       text-decoration: none;
       transition: color 0.15s;
       display: flex;
       align-items: center;
     }
 
-    .links a:hover {
-      color: #1a1a1a;
-    }
+    .links a:hover { color: #1a3a5c; }
 
     .links svg {
       width: 24px;
@@ -95,30 +312,151 @@
     }
 
     .back {
-      margin-top: 3rem;
       font-size: 0.875rem;
-      color: #888;
+      color: #8899aa;
       text-decoration: none;
       transition: color 0.15s;
     }
 
-    .back:hover {
-      color: #1a1a1a;
+    .back:hover { color: #1a3a5c; }
+
+    /* Image modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 1000;
+      cursor: zoom-out;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-overlay img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 8px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+    }
+
+    .zoomable {
+      cursor: zoom-in;
     }
 
     footer {
       text-align: center;
       padding: 2rem;
       font-size: 0.8rem;
-      color: #aaa;
+      color: #aab8c8;
     }
   </style>
 </head>
 <body>
   <main>
     <h1>Finder Pane</h1>
-    <p class="description">A visual file browser pane for your terminal.</p>
-    <span class="badge">Open Source</span>
+    <p class="tagline">A visual file browser for your terminal.<br>Browse files, preview images and videos right next to Claude Code.</p>
+    <div class="install-cmd"><span class="prompt">$</span> brew install orchardworks/tap/finder-pane</div>
+
+    <!-- Hero: screenshot or video of cmux + Claude Code + finder-pane -->
+    <div class="hero-media">
+      <img src="finder-pane-with-cmux.png" alt="Claude Code and finder-pane side by side in cmux" class="zoomable">
+    </div>
+
+    <div class="features">
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-icon">&#x1F4C2;</div>
+          <div class="feature-title">Browse files while you code</div>
+        </div>
+        <div class="feature-desc">
+          finder-pane runs in a browser pane next to Claude Code via <a href="https://cmux.dev">cmux</a>.
+          See your directory structure, navigate folders, and check what's there &mdash; without switching windows.
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-icon">&#x1F5BC;</div>
+          <div class="feature-title">Preview files instantly</div>
+        </div>
+        <div class="feature-desc">
+          Click a file to preview it inline. Images, videos, Markdown, PDF, HTML &mdash; no need to open another app.
+          Great for checking generated images, reading docs, or reviewing video output without leaving your workflow.
+        </div>
+        <div class="feature-media-grid">
+          <div class="feature-media">
+            <img src="image-preview.png" alt="Image preview in finder-pane" class="zoomable">
+          </div>
+          <div class="feature-media">
+            <img src="markdown-preview.png" alt="Markdown preview in finder-pane" class="zoomable">
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-icon">&#x1F4CC;</div>
+          <div class="feature-title">One workspace for scattered files</div>
+        </div>
+        <div class="feature-desc">
+          Pin files from any directory into the tray. Preview images, compare outputs, all without juggling Finder windows.
+        </div>
+        <div class="feature-media">
+          <img src="tray.png" alt="Tray with pinned files from different directories" class="zoomable">
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-icon">&#x26A1;</div>
+          <div class="feature-title">One command to open</div>
+        </div>
+        <div class="feature-desc">
+          Type <code>/finder-pane</code> in Claude Code and it opens instantly.
+          The Claude Code skill handles server startup and browser pane &mdash; you just say the word.
+        </div>
+      </div>
+    </div>
+
+    <div class="setup">
+      <h2>Get started</h2>
+      <div class="setup-steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-label">Install</div>
+            <code>brew install orchardworks/tap/finder-pane</code>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-label">Add Claude Code skill</div>
+            <code>finder-pane install-skill</code>
+            <div class="step-note">Enables <code>/finder-pane</code> command in Claude Code</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <div class="step-label">Use</div>
+            <code>/finder-pane</code>
+            <div class="step-note">Opens current directory in a browser pane</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="badges">
+      <span class="badge">macOS</span>
+      <span class="badge">Open Source</span>
+      <span class="badge">Zero Dependencies</span>
+    </div>
 
     <div class="links">
       <a href="https://github.com/orchardworks/finder-pane" aria-label="GitHub">
@@ -129,6 +467,31 @@
     <a class="back" href="/">&larr; Orchardworks</a>
   </main>
 
+  <div class="modal-overlay" id="modal">
+    <img id="modal-img" src="" alt="">
+  </div>
+
   <footer>&copy; Orchardworks</footer>
+
+  <script>
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modal-img');
+
+    document.querySelectorAll('.zoomable').forEach(img => {
+      img.addEventListener('click', () => {
+        modalImg.src = img.src;
+        modalImg.alt = img.alt;
+        modal.classList.add('active');
+      });
+    });
+
+    modal.addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') modal.classList.remove('active');
+    });
+  </script>
 </body>
 </html>
